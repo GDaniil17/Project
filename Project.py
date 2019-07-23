@@ -4,11 +4,25 @@ import os
 import random
 from PIL import ImageTk, Image
 
+def create_window():
+    window = Toplevel(root)
+    window.title("Generator")
+    window.geometry("1000x400")
+    window.resizable(0,0)
+
+# Первое окно
 root = Tk()
+root.title("Quizzer")
+root.geometry("1000x300")
+root.resizable(0,0)
+
+# Второе окно
+b = Button(root, text = "Создать тест", font = ("Time New Roman", 10, "bold"), command=create_window)
+b.pack()
 
 current = 'Battles.txt'
 lines = list(open(current).read().split("\n"))
-d = dict(i.split('—') for i in lines)
+d = dict(i.split('— ') for i in lines)
 rand = random.choice(list(d.keys()))
 
 r = ['Сражения','Мировая история','Правители','Реформы', "Войны и Восстания"]
@@ -28,7 +42,7 @@ def ch(event):
     rand = random.choice(list(d.keys()))
 
 lis = Listbox(root, width=50, height=6)
-lis = Listbox(root,selectmode=SINGLE,height=len(r)+10, width = max(len(i) for i in r)+10)
+lis = Listbox(root, selectmode=SINGLE, height = 5, width = 50, font = ("Time New Roman", 20, "bold"))
 for i in r:
     lis.insert(END,i)
 
@@ -45,8 +59,8 @@ def change_1():
     #b1['fg'] = '#ffffff'
     #b1['activeforeground'] = '#ffffff'
 
-b1 = Button(text = rand, font=("Time New Roman", 40), width = len(rand)*10, height = 3)
-b1.config(command=change_1)
+b1 = Button(bg = "ivory2", text = rand, font=("Time New Roman", 20), width = 50, height = 1)
+b1.config(command = change_1)
 b1.pack()
 
 def change_next():
@@ -55,13 +69,15 @@ def change_next():
     rand = tmp
     b1["text"] = rand
     b1.pack()
-    
-b2 = Button(text = "Следующий вопрос", font=("Time New Roman", 40), width = 16*3, height = 5)
-b2.config(command=change_next)
+
+#frame = Frame(root, bg = 'black', width = 95, height = 5)
+
+b2 = Button(bg = "gainsboro", text = "Следующий вопрос", font = ("Time New Roman", 16, "bold"), width = 40, height = 2)
+b2.config(command = change_next)
 b2.pack()
 root.mainloop()
 
-b1 = Button(text = "Ответ", width = len(s)*15, height=16, bg = "white",font="Arial 32")
-b1.config(bd = 50, command = change)
-b1.pack()
-root.mainloop()
+#b1 = Button(text = "Ответ", width = 95, height=2, bg = "",font = ("Arial", 30, "bold"))
+#b1.config(bd = 50, command = change)
+#b1.pack()
+#root.mainloop()
