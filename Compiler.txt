@@ -1,0 +1,1 @@
+pyinstaller --onedir --onefile --name=Second_window "C:\Users\Даниил\Desktop\Quezeter\Second_window.py"
